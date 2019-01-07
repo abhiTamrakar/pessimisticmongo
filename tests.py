@@ -1,35 +1,34 @@
 import random
-import time
 from mongoEngineLock import mongoEngineLock, MongoLockTimeout
 
-lock = mongoEngineLock('locktests', poll=2, retries=15)
+def ConcurrencyTest(name, poll, timeout, retries, iterations):
+    lock = mongoEngineLock('locktests', poll=poll, timeout=timeout, retries=retries)
+    try:
+       with lock(name):
+          for i in range(iterations):
+             print 'iteration #%d, user - %s' % (i, name)
+             random_user = str(random.random())
+             with lock(random_user):
+                print 'get lock with random user - %s' % (random_user)
+    except MongoLockTimeout as e:
+       print 'Timedout!!! details are: %s'  % (e.message)
 
-def TimeoutTest(name):
-    print 'Trying Timeout Test with value %s' % (name)
-    with lock(name):
-        try:
-            for i in range(12):
-                print 'i is %d for id %s' % (i, name)
-                time.sleep(5)
-        except Exception as e:
-            raise e
+"""
+ Test 1: test with higher polling interval and dynamic users.
+"""
+print 'Test 1: high polling interval.'
+ConcurrencyTest(str(random.random()), 1, 10, 5, 4)
 
-def ConcurrencyTest(name):
-    print 'Trying Concurrency Test with value %s' % (name)
-    with lock(name):
-        try:
-            for i in range(8):
-                print 'i is %d for id %s' % (i, name)
-                time.sleep(5)
-        except Exception as e:
-            raise e
+"""
+ Test 2: test with short timeout and dynamic users.
+"""
 
-try:
-    TimeoutTest(str(random.random()))
-except MongoLockTimeout as e:
-    print e.message
+print '\n\nTest 2: short timeout.'
+ConcurrencyTest(str(random.random()), 1, 3, 5, 8)
 
-try:
-    ConcurrencyTest(str(random.random()))
-except MongoLockTimeout as e:
-    print e.message
+"""
+ Test 3: test with short polling, optimal timeout and dynamic users.
+"""
+
+print '\n\nTest 1: short polling and optimal timeout'
+ConcurrencyTest(str(random.random()), 0.1, 10, 5, 3)
