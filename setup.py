@@ -25,5 +25,7 @@ setuptools.setup(
         "pymongo>=3.7.2",
         "mongoengine>=0.16.3"
     ],
-    py_modules=["mongoEngineLock"]
+    py_modules=["mongoEngineLock"],
+    setup_requires=["pytest-runner", "flake8"],
+    tests_require=["pytest", "flake8"]
 )

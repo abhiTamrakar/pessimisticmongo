@@ -1,8 +1,0 @@
-README.txt
-mongoEngineLock.py
-setup.py
-mongoEngineLock.egg-info/PKG-INFO
-mongoEngineLock.egg-info/SOURCES.txt
-mongoEngineLock.egg-info/dependency_links.txt
-mongoEngineLock.egg-info/requires.txt
-mongoEngineLock.egg-info/top_level.txt
