@@ -12,6 +12,9 @@ With multiple collections and frequent requests coming in, it is on DB performan
 
 Hence, this utility, targets collection based locking mechanism, fully controlled in application for the DB.
 
+## Installation
+`pip install mongoEngineLock`
+
 ## Usage
 ```
 from mongoEngineLock import mongoEngineLock, MongoLockTimeout
