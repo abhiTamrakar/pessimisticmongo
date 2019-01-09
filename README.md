@@ -10,7 +10,7 @@ The real intention behind writing this utility isn't just Database locking. Lock
 
 With multiple collections and frequent requests coming in, it is on DB performance when a transaction is waitingon the lock on Database, when there is only one collection involved in the operation at the moment.
 
-Hence, this utility, targets collection based locking mechanism, fully controoled in application for the DB.
+Hence, this utility, targets collection based locking mechanism, fully controlled in application for the DB.
 
 ## Usage
 ```
