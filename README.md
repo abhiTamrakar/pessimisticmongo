@@ -1,4 +1,4 @@
-# PessimisticLockMongo
+# mongoEngineLock
 Pessimistic lock implementation for mongoengine, using  a very simple logic
 
 `Inspired by mongolock and pessimistic locks concept.`
